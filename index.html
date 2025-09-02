@@ -38,9 +38,7 @@
       background: rgba(255,255,255,.85);
       border-bottom:1px solid #e2e8f0;
     }
-    .nav{
-      display:flex; align-items:center; gap:16px; padding:10px 0;
-    }
+    .nav{display:flex; align-items:center; gap:16px; padding:10px 0}
     .brand{display:flex; align-items:center; gap:12px}
     .brand img{width:44px; height:44px}
     .brand h1{font-size:18px; line-height:1.2; margin:0; font-weight:700}
@@ -69,33 +67,15 @@
     .dropdown a:hover{background:#f1f5f9}
     .menu > li:focus-within .dropdown, .menu > li:hover .dropdown{display:block}
 
-    /* Mobile */
     .hamb{display:none; margin-left:auto; background:var(--blue); color:#fff; border:none; padding:10px 12px; border-radius:12px}
-    @media (max-width: 900px){
-      .menu{display:none; width:100%}
-      .menu.open{display:grid; grid-template-columns:1fr; gap:6px; padding:10px 0}
-      .menu > li{width:100%}
-      .menu > li > a, .menu > li > button{width:100%; justify-content:space-between; background:#fff; border:1px solid #e5e7eb}
-      .dropdown{position:static; display:grid; gap:6px; box-shadow:none; border:none; padding:6px 0}
-      .hamb{display:inline-flex}
-    }
 
     /* Hero */
-    .hero{
-      background: linear-gradient(135deg, #e0f2fe, #f5f7ff);
-      border-bottom:1px solid #e2e8f0;
-    }
-    .hero .inner{
-      display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; padding:28px 0;
-      align-items:center;
-    }
+    .hero{background: linear-gradient(135deg, #e0f2fe, #f5f7ff); border-bottom:1px solid #e2e8f0}
+    .hero .inner{display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; padding:28px 0; align-items:center}
     .hero h2{margin:0 0 10px; font-size:32px}
     .hero p{margin:0 0 16px; color:var(--muted)}
     .hero .cta{display:flex; gap:10px; flex-wrap:wrap}
-    .btn{
-      display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px;
-      border:1px solid #bcd7ff; background:#0b63d6; color:#fff; font-weight:700; box-shadow:var(--shadow)
-    }
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid #bcd7ff; background:#0b63d6; color:#fff; font-weight:700; box-shadow:var(--shadow)}
     .btn.alt{background:#fff; color:#0b63d6}
     .stat{display:flex; gap:18px; align-items:center; padding:14px; background:#fff; border:1px solid #e5e7eb; border-radius:14px}
 
@@ -105,35 +85,42 @@
     .section-title h3{margin:0; font-size:22px}
     .grid{display:grid; gap:14px}
     .grid.cards{grid-template-columns: repeat(3, 1fr)}
-    .card{
-      background:var(--card); border:1px solid #e5e7eb; border-radius:var(--radius);
-      padding:16px; box-shadow:var(--shadow);
-    }
+    .card{background:var(--card); border:1px solid #e5e7eb; border-radius:var(--radius); padding:16px; box-shadow:var(--shadow)}
     .card h4{margin:0 0 8px}
     .meta{font-size:12px; color:var(--muted)}
-    @media (max-width:900px){ .grid.cards{grid-template-columns:1fr} }
 
-    /* Pengaduan form */
+    /* Form */
     form .row{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
     form .row.single{grid-template-columns:1fr}
     label{font-weight:600; font-size:14px; margin-bottom:6px; display:block}
-    input, select, textarea{
-      width:100%; padding:12px 12px; border:1px solid #cbd5e1; border-radius:12px; background:#fff;
-      font-size:14px
-    }
+    input, select, textarea{width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; background:#fff; font-size:14px}
     textarea{min-height:120px}
     .req::after{content:" *"; color:#ef4444}
 
     /* Footer */
-    footer{
-      margin-top:32px; background:#0b63d6; color:#eaf2ff;
-      padding:20px 0;
-    }
+    footer{margin-top:32px; background:#0b63d6; color:#eaf2ff; padding:20px 0}
     .footgrid{display:grid; grid-template-columns: 2fr 1fr 1fr; gap:18px}
     .footgrid h5{margin:6px 0 8px}
     .footgrid a{color:#eaf2ff}
     .copyright{border-top:1px solid rgba(255,255,255,.25); margin-top:14px; padding-top:10px; font-size:13px; color:#dbeafe}
-    @media (max-width:900px){ .footgrid{grid-template-columns:1fr} }
+
+    /* Responsif */
+    @media (max-width: 900px){
+      .menu{display:none; width:100%}
+      .menu.open{display:block; padding:10px 0}
+      .menu > li{width:100%}
+      .menu > li > a, .menu > li > button{width:100%; justify-content:space-between; background:#fff; border:1px solid #e5e7eb}
+      .dropdown{position:static; display:none; box-shadow:none; border:none; padding:6px 0}
+      .menu > li.open .dropdown{display:block}
+      .hamb{display:inline-flex}
+
+      .hero .inner{grid-template-columns:1fr; text-align:center}
+      .hero .cta{justify-content:center}
+      .stat{flex-direction:column; text-align:center}
+
+      .grid.cards{grid-template-columns:1fr}
+      .footgrid{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
@@ -147,32 +134,27 @@
         </div>
       </div>
       <button class="hamb" aria-expanded="false" aria-controls="mainmenu" onclick="toggleMenu()">Menu</button>
-      <ul class="menu" id="mainmenu" role="menubar" aria-label="Menu utama">
-        <li><a href="#beranda" role="menuitem">Beranda</a></li>
+      <ul class="menu" id="mainmenu">
+        <li><a href="#beranda">Beranda</a></li>
         <li>
-          <button aria-haspopup="true" aria-expanded="false">Profil Desa <span class="caret" aria-hidden="true"></span></button>
-          <div class="dropdown" role="menu">
+          <button>Profil Desa <span class="caret"></span></button>
+          <div class="dropdown">
             <a href="#profil">Profil Desa</a>
             <a href="#visi-misi">Visi & Misi</a>
             <a href="#struktur">Struktur Organisasi</a>
           </div>
         </li>
         <li>
-          <button aria-haspopup="true" aria-expanded="false">Pelayanan Masyarakat <span class="caret"></span></button>
+          <button>Pelayanan Masyarakat <span class="caret"></span></button>
           <div class="dropdown">
             <a href="#adminduk">Pelayanan Adminduk</a>
             <a href="#pelayanan-lain">Pelayanan Umum Lainnya</a>
           </div>
         </li>
-        <li>
-          <button aria-haspopup="true" aria-expanded="false">Lembaga Desa <span class="caret"></span></button>
-          <div class="dropdown">
-            <a href="#lembaga">Daftar Lembaga</a>
-          </div>
-        </li>
+        <li><a href="#lembaga">Lembaga Desa</a></li>
         <li><a href="#agenda">Agenda / Rencana Kerja</a></li>
         <li>
-          <button aria-haspopup="true" aria-expanded="false">Publikasi <span class="caret"></span></button>
+          <button>Publikasi <span class="caret"></span></button>
           <div class="dropdown">
             <a href="#kegiatan">Kegiatan</a>
             <a href="#keuangan">Laporan Keuangan</a>
@@ -190,7 +172,7 @@
       <div class="container inner">
         <div>
           <h2>Selamat datang di Website Resmi Desa Keling</h2>
-          <p>Sumber informasi terkini mengenai layanan, agenda, dan publikasi Pemerintah Desa Keling, Kec. Kepung, Kab. Kediri.</p>
+          <p>Sumber informasi terkini mengenai layanan, agenda, dan publikasi Pemerintah Desa Keling.</p>
           <div class="cta">
             <a class="btn" href="#adminduk">Ajukan Layanan Adminduk</a>
             <a class="btn alt" href="#pengaduan">Kirim Pengaduan</a>
@@ -200,93 +182,11 @@
           <img src="assets/logo.png" alt="Logo" style="width:56px;height:56px">
           <div>
             <div style="font-weight:800">Alamat Kantor Desa</div>
-            <div class="meta">67H3+6R5, Jl. Raya Keling, Bukaan, Keling, Kec. Kepung, Kabupaten Kediri, Jawa Timur 64293</div>
+            <div class="meta">67H3+6R5, Jl. Raya Keling, Bukaan, Keling, Kec. Kepung, Kabupaten Kediri</div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Informasi Terkini -->
-    <section>
-      <div class="container">
-        <div class="section-title">
-          <h3>Informasi Terkini</h3>
-          <a href="#kegiatan">Lihat semua &rarr;</a>
-        </div>
-        <div class="grid cards">
-          <article class="card">
-            <h4>Pengumuman Pelayanan Adminduk</h4>
-            <p>Pelayanan perekaman KTP-el dan perubahan KK dibuka setiap hari kerja pukul 08.00–13.00 WIB di Balai Desa.</p>
-            <div class="meta">Dipublikasikan: 02 Sep 2025</div>
-          </article>
-          <article class="card">
-            <h4>Jadwal Musyawarah Desa (Musdes)</h4>
-            <p>Musdes rencana kerja tahun berjalan dilaksanakan pekan ke-3 bulan ini. Undangan menyusul melalui RT/RW.</p>
-            <div class="meta">Dipublikasikan: 30 Agu 2025</div>
-          </article>
-          <article class="card">
-            <h4>Publikasi Realisasi APBDes Semester I</h4>
-            <p>Infografik dan rincian realisasi APBDes Semester I telah diunggah pada menu Publikasi &rarr; Laporan Keuangan.</p>
-            <div class="meta">Dipublikasikan: 28 Agu 2025</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Profil Desa -->
-    <section id="profil">
-      <div class="container">
-        <div class="section-title"><h3>Profil Desa</h3></div>
-        <div class="card">
-          <p>Desa Keling terletak di Kecamatan Kepung, Kabupaten Kediri, Provinsi Jawa Timur. Situs ini memuat gambaran umum wilayah, demografi, potensi, dan sejarah singkat desa sebagai bahan informasi publik.</p>
-          <ul>
-            <li>Letak & Batas Wilayah</li>
-            <li>Jumlah Penduduk & Demografi</li>
-            <li>Potensi Unggulan & Ekonomi</li>
-            <li>Sejarah & Budaya Desa</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Visi Misi -->
-    <section id="visi-misi">
-      <div class="container">
-        <div class="section-title"><h3>Visi & Misi</h3></div>
-        <div class="grid cards">
-          <div class="card">
-            <h4>Visi</h4>
-            <p>“Terwujudnya Desa Keling yang Maju, Berdaya Saing, Tertib Administrasi, dan Sejahtera.”</p>
-          </div>
-          <div class="card">
-            <h4>Misi</h4>
-            <ul>
-              <li>Meningkatkan kualitas pelayanan publik di tingkat desa.</li>
-              <li>Mendorong partisipasi masyarakat dalam pembangunan.</li>
-              <li>Transparansi dan akuntabilitas tata kelola keuangan desa.</li>
-              <li>Penguatan ekonomi berbasis potensi lokal.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Struktur Organisasi -->
-    <section id="struktur">
-      <div class="container">
-        <div class="section-title"><h3>Struktur Organisasi Pemerintah Desa</h3></div>
-        <div class="card">
-          <p>Struktur organisasi terdiri dari Kepala Desa, Sekretaris Desa, Kaur & Kasi, Kepala Dusun, serta perangkat pendukung lainnya. Bagian ini dapat diperluas menjadi bagan visual.</p>
-          <ul>
-            <li>Kepala Desa</li>
-            <li>Sekretaris Desa</li>
-            <li>Kaur Umum & Perencanaan & Keuangan</li>
-            <li>Kasi Pemerintahan • Kesejahteraan • Pelayanan</li>
-            <li>Kepala Dusun</li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
     <!-- Pelayanan Masyarakat: Adminduk -->
     <section id="adminduk">
@@ -301,8 +201,8 @@
               <li>Fotocopy Akta Nikah / Cerai</li>
               <li>Fotocopy Akta Kelahiran</li>
               <li>Fotocopy Ijazah</li>
-              <li>Formulir Pendaftaran Peristiwa Kependudukan (F-1.02) <a href="assets/form/F-1.02.docx" download>Unduh</a></li>
-              <li>Surat Pernyataan Tidak Memiliki Dokumen Kependudukan (F-1.04) <a href="assets/form/F-1.04.docx" download>Unduh</a></li>
+              <li>Formulir F-1.02 <a href="assets/form/F-1.02.docx" download>Unduh</a></li>
+              <li>Formulir F-1.04 <a href="assets/form/F-1.04.docx" download>Unduh</a></li>
             </ul>
           </div>
 
@@ -311,9 +211,9 @@
             <ul>
               <li>Surat Pengantar RT</li>
               <li>Kartu Keluarga asli + Fotocopy</li>
-              <li>Formulir Pendaftaran Peristiwa Kependudukan (F-1.02) <a href="assets/form/F-1.02.docx" download>Unduh</a></li>
+              <li>Formulir F-1.02 <a href="assets/form/F-1.02.docx" download>Unduh</a></li>
               <li>Dokumen pendukung (Akta Nikah/Ijazah/Akta Lahir/Akta Cerai)</li>
-              <li>Surat Pernyataan Tidak Memiliki Dokumen Kependudukan (F-1.04) <a href="assets/form/F-1.04.docx" download>Unduh</a></li>
+              <li>Formulir F-1.04 <a href="assets/form/F-1.04.docx" download>Unduh</a></li>
             </ul>
           </div>
 
@@ -322,4 +222,107 @@
             <ul>
               <li>Surat Pengantar RT</li>
               <li>Kartu Keluarga asli + Fotocopy</li>
-              <li>Formul
+              <li>Formulir F-1.02 <a href="assets/form/F-1.02.docx" download>Unduh</a></li>
+              <li>Dokumen pendukung (Surat Nikah/Ijazah/Akta Lahir/Cerai/Mati/Pindah)</li>
+              <li>Formulir F-1.06 <a href="assets/form/F-1.06.pdf" download>Unduh</a></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h4>Permohonan E-KTP Baru</h4>
+            <ul>
+              <li>Surat Pengantar RT</li>
+              <li>Kartu Keluarga asli + Fotocopy</li>
+              <li>Formulir F-1.02 <a href="assets/form/F-1.02.docx" download>Unduh</a></li>
+              <li>Pas Foto 3x4 (2 lembar)</li>
+              <li>Fotocopy Ijazah terakhir</li>
+              <li>Fotocopy Akta Lahir</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Pengaduan -->
+    <section id="pengaduan">
+      <div class="container">
+        <div class="section-title"><h3>Pengaduan / Laporan</h3></div>
+        <form class="card" action="https://formspree.io/f/mnqevwqy" method="POST">
+          <div class="row">
+            <div>
+              <label class="req">Nama Lengkap</label>
+              <input name="nama" required>
+            </div>
+            <div>
+              <label class="req">Nomor HP</label>
+              <input name="hp" required>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label class="req">Alamat</label>
+              <input name="alamat" required>
+            </div>
+            <div>
+              <label>Topik</label>
+              <select name="topik">
+                <option value="">Pilih topik</option>
+                <option>Pelayanan Adminduk</option>
+                <option>Infrastruktur</option>
+                <option>Bantuan Sosial</option>
+                <option>Keamanan/Ketertiban</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+          </div>
+          <div class="row single">
+            <div>
+              <label class="req">Uraian Pengaduan</label>
+              <textarea name="uraian" required></textarea>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:10px">
+            <button class="btn alt" type="reset">Bersihkan</button>
+            <button class="btn" type="submit">Kirim</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footgrid">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px">
+            <img src="assets/logo.png" style="width:42px; height:42px">
+            <div><strong>Pemerintah Desa Keling</strong><br>Kecamatan Kepung, Kabupaten Kediri</div>
+          </div>
+          <p style="margin:10px 0 0">Alamat: 67H3+6R5, Jl. Raya Keling, Kec. Kepung, Kab. Kediri</p>
+        </div>
+        <div>
+          <h5>Tautan</h5>
+          <a href="#beranda">Beranda</a><br>
+          <a href="#adminduk">Pelayanan</a><br>
+          <a href="#pengaduan">Pengaduan</a>
+        </div>
+        <div>
+          <h5>Kontak</h5>
+          <div>Email: dkeling003@gmail.com</div>
+          <div>Telepon: (0354) —</div>
+        </div>
+      </div>
+      <div class="copyright">© <span id="y"></span> Pemerintah Desa Keling</div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu(){
+      const menu = document.getElementById('mainmenu');
+      menu.classList.toggle('open');
+    }
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
