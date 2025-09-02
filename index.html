@@ -26,8 +26,12 @@
       font-family: Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
       color:var(--ink);
       background: var(--bg) url('assets/batik.svg');
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
     a{color:inherit;text-decoration:none}
+    /* khusus link unduh */
+    a.download-link{color:var(--blue); font-weight:600; text-decoration:underline}
     img{max-width:100%;display:block}
     .container{width:min(1200px, 92vw);margin-inline:auto}
 
@@ -35,7 +39,7 @@
     header{
       position:sticky; top:0; z-index:50;
       backdrop-filter:saturate(1.2) blur(8px);
-      background: rgba(255,255,255,.85);
+      background: rgba(255,255,255,.95);
       border-bottom:1px solid #e2e8f0;
     }
     .nav{
@@ -111,7 +115,14 @@
     }
     .card h4{margin:0 0 8px}
     .meta{font-size:12px; color:var(--muted)}
-    @media (max-width:900px){ .grid.cards{grid-template-columns:1fr} }
+    @media (max-width:900px){ 
+      .grid.cards{grid-template-columns:1fr}
+      .hero .inner{grid-template-columns:1fr; text-align:center}
+      .hero .cta{justify-content:center}
+      .stat{flex-direction:column; text-align:center}
+      .footgrid{grid-template-columns:1fr}
+      form .row{grid-template-columns:1fr}
+    }
 
     /* Pengaduan form */
     form .row{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
@@ -134,6 +145,13 @@
     .footgrid a{color:#eaf2ff}
     .copyright{border-top:1px solid rgba(255,255,255,.25); margin-top:14px; padding-top:10px; font-size:13px; color:#dbeafe}
     @media (max-width:900px){ .footgrid{grid-template-columns:1fr} }
+
+    /* small adjustments for better mobile */
+    @media (max-width:480px){
+      .brand h1{font-size:16px}
+      .hero h2{font-size:22px}
+      .btn{padding:10px 12px; font-size:14px}
+    }
   </style>
 </head>
 <body>
@@ -299,6 +317,7 @@
               <li>Perubahan KK (kelahiran/kematian/pendidikan/pekerjaan/alamat)</li>
               <li>Pecah KK</li>
             </ul>
+            <p style="margin-top:8px"><a class="download-link" href="assets/form/F-1.02.docx" download>Unduh Formulir F-1.02 (DOCX)</a></p>
           </div>
           <div class="card">
             <h4>KTP-el</h4>
@@ -307,6 +326,7 @@
               <li>Pergantian karena hilang/rusak</li>
               <li>Perubahan elemen data</li>
             </ul>
+            <p style="margin-top:8px"><a class="download-link" href="assets/form/F-1.06.pdf" download>Unduh Formulir F-1.06 (PDF)</a></p>
           </div>
           <div class="card">
             <h4>Akta Catatan Sipil</h4>
@@ -315,6 +335,7 @@
               <li>Akta Perkawinan/Perceraian</li>
               <li>Akta Kematian</li>
             </ul>
+            <p style="margin-top:8px"><a class="download-link" href="assets/form/F-1.04.docx" download>Unduh F-1.04 (DOCX)</a></p>
           </div>
           <div class="card">
             <h4>Pindah Datang/Ke luar</h4>
@@ -376,6 +397,11 @@
           <div class="card"><h4>BPD</h4><p>Badan Permusyawaratan Desa.</p></div>
           <div class="card"><h4>LKD/LPM</h4><p>Lembaga Kemasyarakatan Desa / Lembaga Pemberdayaan Masyarakat.</p></div>
           <div class="card"><h4>PKK</h4><p>Tim Penggerak PKK Desa.</p></div>
+          <div class="card"><h4>BUMDES</h4><p>Badan Usaha Milik Desa.</p></div>
+          <div class="card"><h4>LPMD</h4><p>Lembaga Pemberdayaan Masyarakat Desa.</p></div>
+          <div class="card"><h4>TPK</h4><p>Tim Pelaksana Kegiatan Desa.</p></div>
+          <div class="card"><h4>POKDARWIS</h4><p>Kelompok Sadar Wisata.</p></div>
+          <div class="card"><h4>TSBD</h4><p>Tim Siaga Bencana Desa.</p></div>
           <div class="card"><h4>Karang Taruna</h4><p>Organisasi kepemudaan desa.</p></div>
           <div class="card"><h4>RT/RW</h4><p>Rukun Tetangga & Rukun Warga.</p></div>
           <div class="card"><h4>Posyandu</h4><p>Pelayanan kesehatan masyarakat.</p></div>
@@ -386,7 +412,7 @@
     <!-- Agenda -->
     <section id="agenda">
       <div class="container">
-        <div class="section-title"><h3>Agenda / Rencana Kerja Desa</h3></div>
+        <div class="section-title"><h33>Agenda / Rencana Kerja Desa</h3></div>
         <div class="card">
           <ul>
             <li>Musyawarah Desa (Musdes) Penyusunan RKPDes</li>
@@ -437,25 +463,30 @@
     <section id="pengaduan">
       <div class="container">
         <div class="section-title"><h3>Pengaduan / Laporan</h3></div>
-        <form class="card" onsubmit="event.preventDefault(); alert('Terima kasih, pengaduan Anda telah direkam (demo).'); this.reset();">
+        <!--
+          Form pengaduan: dikirim via mailto ke dkeling003@gmail.com dengan JS
+          agar isi formulir dimasukkan ke body email. Jika pengguna tidak memiliki
+          aplikasi email terpasang, browser akan mencoba membuka klien default.
+        -->
+        <form id="pengaduanForm" class="card" onsubmit="return sendPengaduan(event);">
           <div class="row">
             <div>
               <label class="req">Nama Lengkap</label>
-              <input required placeholder="Nama sesuai KTP">
+              <input name="nama" id="nama" required placeholder="Nama sesuai KTP">
             </div>
             <div>
               <label class="req">Nomor HP</label>
-              <input required placeholder="08xxxxxxxxxx" inputmode="numeric">
+              <input name="hp" id="hp" required placeholder="08xxxxxxxxxx" inputmode="numeric">
             </div>
           </div>
           <div class="row">
             <div>
               <label class="req">Alamat</label>
-              <input required placeholder="Dusun / RT / RW">
+              <input name="alamat" id="alamat" required placeholder="Dusun / RT / RW">
             </div>
             <div>
               <label>Topik</label>
-              <select>
+              <select name="topik" id="topik">
                 <option value="">Pilih topik</option>
                 <option>Pelayanan Adminduk</option>
                 <option>Infrastruktur</option>
@@ -468,7 +499,7 @@
           <div class="row single">
             <div>
               <label class="req">Uraian Pengaduan</label>
-              <textarea required placeholder="Tulis kronologi dan detail laporan..."></textarea>
+              <textarea name="uraian" id="uraian" required placeholder="Tulis kronologi dan detail laporan..."></textarea>
             </div>
           </div>
           <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:10px">
@@ -501,20 +532,65 @@
         </div>
         <div>
           <h5>Kontak</h5>
-          <div>Email: desa.keling@example.go.id</div>
-          <div>Telepon: (0354) —</div>
+          <div>Email: dkeling003@gmail.com</div>
+          <div>Telp: 082228278397 (Bpk. Eko)</div>
+          <div>Telp: 085859887355 (Bpk. Didin)</div>
         </div>
       </div>
-      <div class="copyright">© <span id="y"></span> Pemerintah Desa Keling. Dibangun untuk GitHub &amp; Vercel.</div>
+      <div class="copyright">© <span id="y"></span> Pemerintah Desa Keling</div>
     </div>
   </footer>
 
   <script>
+    // Toggle menu (mobile)
     function toggleMenu(){
       const m = document.getElementById('mainmenu');
       const isOpen = m.classList.toggle('open');
       document.querySelector('.hamb').setAttribute('aria-expanded', isOpen ? 'true':'false');
     }
+
+    // Kirim pengaduan: buat mailto dengan isi form -> membuka aplikasi email
+    function sendPengaduan(e){
+      e.preventDefault();
+      const to = 'dkeling003@gmail.com';
+      const nama = document.getElementById('nama').value.trim();
+      const hp = document.getElementById('hp').value.trim();
+      const alamat = document.getElementById('alamat').value.trim();
+      const topik = document.getElementById('topik').value || '-';
+      const uraian = document.getElementById('uraian').value.trim();
+
+      // Pastikan wajib terisi
+      if(!nama || !hp || !alamat || !uraian){
+        alert('Mohon lengkapi semua field wajib (*) sebelum mengirim.');
+        return false;
+      }
+
+      const subject = encodeURIComponent('Pengaduan Desa Keling: ' + (topik !== '-' ? topik : 'Umum'));
+      // Body dengan baris baru
+      let body = '';
+      body += 'Nama: ' + nama + '%0D%0A';
+      body += 'No HP: ' + hp + '%0D%0A';
+      body += 'Alamat: ' + alamat + '%0D%0A';
+      body += 'Topik: ' + topik + '%0D%0A%0D%0A';
+      body += 'Uraian:%0D%0A' + encodeURIComponent(uraian) + '%0D%0A%0D%0A';
+      body += '---%0D%0A';
+      body += 'Dikirim dari Website Resmi Desa Keling';
+
+      // Build mailto
+      const mailto = `mailto:${to}?subject=${subject}&body=${body}`;
+
+      // Buka klien email default
+      window.location.href = mailto;
+
+      // optional: reset form (note: after opening mail client, user may cancel send; we still reset)
+      setTimeout(() => {
+        document.getElementById('pengaduanForm').reset();
+      }, 600);
+
+      return false;
+    }
+
+    // Set tahun copyright
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
